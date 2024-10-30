@@ -1,0 +1,28 @@
+body{
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+}
+a{
+    text-decoration: none;
+}
+#postsChart{
+    width: 500px;
+    height: 600px;
+    max-width: 500px; 
+    max-height: 500px;
+    margin: 0 auto; 
+    display: block;
+
+}
+#usersChart {
+    max-width: 300px; 
+    max-height: 300px;
+    margin: 0 auto; 
+    display: block;
+}
+#visitsChart{
+    max-width: 600px; 
+    max-height: 300px;
+    margin: 0 auto; 
+    display: block;
+}
