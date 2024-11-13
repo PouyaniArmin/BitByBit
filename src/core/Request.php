@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-class Request
+class Request extends Vaildation
 {
 
     public function path(): string
@@ -45,7 +45,16 @@ class Request
                 $data[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             }
         }
+
+        if ($this->isPost() && !empty($_FILES)) {
+            foreach($_FILES as $key=>$value){
+                $data[$key]=$value;
+            }
+        }
+
         return $data;
+    
     }
+
 }
 

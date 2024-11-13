@@ -31,14 +31,14 @@ class Controller
     private function renderLayout()
     {
         ob_start();
-        $this->includeFileIfExists(__DIR__ . "/../view/layouts/{$this->layout}.php");
+        include __DIR__ . "/../view/layouts/{$this->layout}.php";
         return ob_get_clean();
     }
     private function renderOnlyView(string $view, array $data = [])
     {
         extract($data);
         ob_start();
-        $this->includeFileIfExists(__DIR__ . "/../view/$view.php");
+        include __DIR__ . "/../view/$view.php";
         return ob_get_clean();
     }
 
@@ -48,5 +48,9 @@ class Controller
             throw new Exception("Error Not Found File $file", 1);
         }
         include $file;
+    }
+    public function redierctTo($url){
+        header('Location:'.$url);
+        exit;
     }
 }

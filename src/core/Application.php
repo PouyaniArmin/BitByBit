@@ -6,8 +6,10 @@ use Controller;
 class Application{
 
     public Router $router;
-    public function __construct(Router $router)
+    public static string $rootPath;
+    public function __construct(Router $router,string $rootPath)
     {
+        self::$rootPath=$rootPath;
         $this->router=$router;
     }
 
