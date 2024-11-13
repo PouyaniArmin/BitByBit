@@ -4,10 +4,15 @@
       "App\\":"src/",
       "App\\Controllers\\": "src/controllers/",
       "App\\Core\\": "src/core/",
-      "App\\Models\\": "src/models/"
-    }
+      "App\\Models\\": "src/models/",
+      "App\\Utils\\": "src/Utils/"
+    },
+    "files":["src/helpers/FileUploadHelper.php"]
   },
   "require-dev": {
     "phpunit/phpunit": "^11.4"
+  },
+  "require": {
+    "vlucas/phpdotenv": "^5.6"
   }
 }
