@@ -14,18 +14,6 @@
   <!--editor-->
   <script src="https://cdn.tiny.cloud/1/5eh8tkgr02f8fedv3gx83rhqdzfjsrfqqfgsfzt58t18itev/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
-  <script>
-    tinymce.init({
-      selector: '#content', // تغییر به ID صحیح textarea
-      height: 300,
-      menubar: false,
-      directionality: 'rtl', // راست‌چین
-      plugins: 'lists link image preview', // پلاگین‌ها
-      toolbar: 'undo redo | formatselect | bold italic | bullist numlist | alignleft aligncenter alignright alignjustify | link image', // نوار ابزار
-      content_style: "body { font-family: Arial, sans-serif; font-size: 14px; }" // سبک محتوا
-    });
-  </script>
-
   <title>داشبورد</title>
 </head>
 
