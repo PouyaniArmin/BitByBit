@@ -40,6 +40,7 @@ class ComposerStaticInitfbee484fbcb98ba45566f17e8eb69e9b
         array (
             'App\\Utils\\' => 10,
             'App\\Models\\' => 11,
+            'App\\Core\\Middlewares\\' => 21,
             'App\\Core\\' => 9,
             'App\\Controllers\\' => 16,
             'App\\' => 4,
@@ -81,11 +82,15 @@ class ComposerStaticInitfbee484fbcb98ba45566f17e8eb69e9b
         ),
         'App\\Utils\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/Utils',
+            0 => __DIR__ . '/../..' . '/src/utils',
         ),
         'App\\Models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/models',
+        ),
+        'App\\Core\\Middlewares\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/core/middlewares',
         ),
         'App\\Core\\' => 
         array (
@@ -102,16 +107,24 @@ class ComposerStaticInitfbee484fbcb98ba45566f17e8eb69e9b
     );
 
     public static $classMap = array (
+        'App\\Controllers\\CategoryController' => __DIR__ . '/../..' . '/src/controllers/CategoryController.php',
         'App\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/src/controllers/DashboardController.php',
         'App\\Controllers\\HomeController' => __DIR__ . '/../..' . '/src/controllers/HomeController.php',
+        'App\\Controllers\\PostController' => __DIR__ . '/../..' . '/src/controllers/PostController.php',
         'App\\Controllers\\UserController' => __DIR__ . '/../..' . '/src/controllers/UserController.php',
+        'App\\Core\\AdminSetup' => __DIR__ . '/../..' . '/src/core/AdminSetup.php',
         'App\\Core\\Application' => __DIR__ . '/../..' . '/src/core/Application.php',
         'App\\Core\\Controller' => __DIR__ . '/../..' . '/src/core/Controller.php',
         'App\\Core\\DBManager' => __DIR__ . '/../..' . '/src/core/DBManager.php',
+        'App\\Core\\Model' => __DIR__ . '/../..' . '/src/core/Model.php',
         'App\\Core\\Request' => __DIR__ . '/../..' . '/src/core/Request.php',
         'App\\Core\\Router' => __DIR__ . '/../..' . '/src/core/Router.php',
         'App\\Core\\Vaildation' => __DIR__ . '/../..' . '/src/core/Vaildation.php',
         'App\\Core\\ValidatesRequests' => __DIR__ . '/../..' . '/src/core/ValidatesRequests.php',
+        'App\\Models\\CategoryModel' => __DIR__ . '/../..' . '/src/models/CategoryModel.php',
+        'App\\Models\\PostModel' => __DIR__ . '/../..' . '/src/models/PostModel.php',
+        'App\\Models\\UserModel' => __DIR__ . '/../..' . '/src/models/UserModel.php',
+        'App\\Utils\\CsrfToken' => __DIR__ . '/../..' . '/src/utils/CsrfToken.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',

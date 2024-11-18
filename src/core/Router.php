@@ -16,14 +16,14 @@ class Router
         $this->request = $request;
     }
 
-    public function get(string $path, $callback)
+    public function get(string $path, $callback, array $middlewares = [])
     {
-        $this->routers['get'][$path] = $callback;
+        $this->routers['get'][$path] = ['callback' => $callback, 'middlewares' => $middlewares];
     }
 
-    public function post(string $path, $callback)
+    public function post(string $path, $callback, array $middlewares = [])
     {
-        $this->routers['post'][$path] = $callback;
+        $this->routers['post'][$path] = ['callback' => $callback, 'middlewares' => $middlewares];
     }
 
     public function dispacth()
@@ -33,16 +33,26 @@ class Router
         if (!isset($this->routers[$method])) {
             throw new Exception("Method Not Allowed", 405);
         }
-        foreach ($this->routers[$method] as $routeUrl => $callback) {
+
+        foreach ($this->routers[$method] as $routeUrl => $route) {
             $pattern = preg_replace('/\{(\w+)\}/', '(\w+)', $routeUrl);
             if (preg_match('#^' . $pattern . '$#', $path, $matches)) {
-                // Pass the captured parameter values as named arguments to the target function
-                array_shift($matches); // Only keep named subpattern matches
+                foreach ($route['middlewares'] as $middleware) {
+                    $middlewareInstance = new $middleware;
+                    if (method_exists($middlewareInstance, 'handle')) {
+                        $middlewareResult = $middlewareInstance->handle($this->request);
+                        if ($middlewareResult === false) {
+                            return;
+                        }
+                    }
+                }
+                $callback = $route['callback'];
+                array_shift($matches);
                 if (is_array($callback)) {
                     $controller = new $callback[0];
                     $reflection = new ReflectionMethod($controller, $callback[1]);
                     $paramters = $reflection->getParameters();
-                    if (!empty($paramters) && $paramters[0]->gettype() instanceof ReflectionNamedType && $paramters[0]->getType()->getName() === Request::class) {
+                    if (!empty($paramters) && $paramters[0]->getType() instanceof ReflectionNamedType && $paramters[0]->getType()->getName() === Request::class) {
                         return call_user_func([$controller, $callback[1]], $this->request);
                     } else {
                         return call_user_func_array([$controller, $callback[1]], $matches);

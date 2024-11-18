@@ -1,44 +1,53 @@
-<div class="container mt-5">
-        <h2>ایجاد دسته‌بندی جدید</h2>
-        <form action="/save-category" method="POST">
-            <div class="mb-3">
-                <label for="categoryName" class="form-label">نام دسته‌بندی</label>
-                <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="نام دسته‌بندی را وارد کنید" required>
-            </div>
-            <button type="submit" class="btn btn-primary">ایجاد دسته‌بندی</button>
-        </form>
+<div class="mx-4">
+    <?php
 
-        <h3 class="mt-5">لیست دسته‌بندی‌ها</h3>
-        <table class="table">
-            <thead>
+    if (isset($_SESSION['errors'])): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?php foreach ($_SESSION['errors'] as $error): ?>
+                <li><?php echo htmlspecialchars($error); ?></li>
+            <?php endforeach; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION['errors']); ?>
+    <?php endif; ?>
+
+</div>
+<div class="container mt-5">
+    <h2>ایجاد دسته‌بندی جدید</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="categoryName" class="form-label">نام دسته‌بندی</label>
+            <input type="text" class="form-control" id="categoryName" name="category_name" placeholder="نام دسته‌بندی را وارد کنید">
+        </div>
+        <button type="submit" class="btn btn-primary">ایجاد دسته‌بندی</button>
+    </form>
+
+    <h3 class="mt-5">لیست دسته‌بندی‌ها</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>نام دسته‌بندی</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i = 1;
+            foreach ($data as $item): ?>
                 <tr>
-                    <th>#</th>
-                    <th>نام دسته‌بندی</th>
-                    <th>عملیات</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>دسته‌بندی اول</td>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $item['category_name'] ?></td>
                     <td>
-                        <a href="/edit-category/1" class="btn btn-warning btn-sm">ویرایش</a>
-                        <form action="/delete-category/1" method="POST" style="display:inline;">
-                            <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                        <a href="/dashboard/category/update/<?php echo $item['id']?>" class="btn btn-warning btn-sm">ویرایش</a>
+                        <form action="/dashboard/category/delete/<?php echo $item['id']?>" method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="<?php echo $item['id']?>">   
+                        <button type="submit" class="btn btn-danger btn-sm">حذف</button>
                         </form>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>دسته‌بندی دوم</td>
-                    <td>
-                        <a href="/edit-category/2" class="btn btn-warning btn-sm">ویرایش</a>
-                        <form action="/delete-category/2" method="POST" style="display:inline;">
-                            <button type="submit" class="btn btn-danger btn-sm">حذف</button>
-                        </form>
-                    </td>
-                </tr>
-                <!-- سایر دسته‌بندی‌ها -->
-            </tbody>
-        </table>
-    </div>
+            <?php $i++;
+            endforeach; ?>
+            <!-- سایر دسته‌بندی‌ها -->
+        </tbody>
+    </table>
+</div>

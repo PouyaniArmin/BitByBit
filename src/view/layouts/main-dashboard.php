@@ -27,7 +27,7 @@
             <a class="nav-link active" aria-current="page">نام کاربر</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">خروج</a>
+            <a class="nav-link" href="/logout">خروج</a>
           </li>
         </ul>
         <span class="navbar-text">

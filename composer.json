@@ -4,8 +4,9 @@
       "App\\":"src/",
       "App\\Controllers\\": "src/controllers/",
       "App\\Core\\": "src/core/",
+      "App\\Core\\Middlewares\\": "src/core/middlewares/",
       "App\\Models\\": "src/models/",
-      "App\\Utils\\": "src/Utils/"
+      "App\\Utils\\": "src/utils/"
     },
     "files":["src/helpers/FileUploadHelper.php"]
   },

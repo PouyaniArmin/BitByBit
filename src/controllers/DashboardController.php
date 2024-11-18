@@ -7,6 +7,7 @@ use App\Core\DBManager;
 use App\Core\Request;
 use App\Core\ValidatesRequests;
 use App\Models\PostModel;
+use App\Utils\CsrfToken;
 use DateTime;
 use DOMDocument;
 use DOMXPath;
@@ -22,7 +23,7 @@ class DashboardController extends Controller
     {
         return $this->renderView('dashboard');
     }
-    
+
     public function users()
     {
         return $this->renderView('users');
@@ -34,5 +35,15 @@ class DashboardController extends Controller
     public function setting()
     {
         return $this->renderView('setting');
+    }
+
+    public function logout()
+    {
+        CsrfToken::clearToken();
+        session_start();
+        session_unset();
+        session_destroy();
+        session_regenerate_id(true);
+        return $this->redierctTo('/');
     }
 }

@@ -20,6 +20,9 @@ class Model extends DBManager
         foreach ($fields as $filed) {
             if (array_key_exists($filed, $data)) {
                 $stmt->bindValue(':' . $filed, $data[$filed]);
+                if ($filed === 'password') {
+                    $stmt->bindValue(':' . $filed, password_hash($data[$filed], PASSWORD_DEFAULT));
+                }
             }
         }
         $result = $stmt->execute();
@@ -46,6 +49,16 @@ class Model extends DBManager
         $stmt->bindValue(':id', $id);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    protected function getBy(string $table, string $column, string $value)
+    {
+        $query = "SELECT * FROM {$table} WHERE $column=:value";
+        $conn = $this->connect();
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':value', $value);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
 
@@ -76,6 +89,31 @@ class Model extends DBManager
         $stmt = $this->connect()->prepare($query);
         $stmt->bindValue(':id', $id);
         return $stmt->execute();
+    }
+
+    protected function getUserRoleByEmail(string $email)
+    {
+        $query = "SELECT r.name FROM roles r 
+              INNER JOIN role_user ru ON r.id = ru.role_id
+              INNER JOIN users u ON u.id = ru.user_id
+              WHERE u.email = :email LIMIT 1";
+        $conn = $this->connect();
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+        $role = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($role && $role['name'] === 'Admin') {
+            return $role;
+        }
+        return null;
+    }
+    protected function getUserRole($email)
+    {
+        $user = $this->getBy('users', 'email', $email);
+        if ($user) {
+            return $this->getUserRoleByEmail($email);
+        }
+        return null;
     }
 
     private function buildInsertQuery(string $table): string

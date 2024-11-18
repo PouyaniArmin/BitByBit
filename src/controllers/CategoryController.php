@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Core\Request;
 use App\Core\ValidatesRequests;
+use App\Models\CategoryModel;
 
 class CategoryController extends Controller
 {
@@ -16,11 +18,36 @@ class CategoryController extends Controller
 
     public function category()
     {
+        $category = new CategoryModel;
+        $data = $category->getAllCategory();
+        return $this->renderView('category', $data);
+    }
 
+    public function saveCategory(Request $request)
+    {
+        $fields = ['category_name' => 'required'];
+        $data = $this->validate($fields, $request->body());
+        $category = new CategoryModel;
+        $category->createCategory($data);
         return $this->renderView('category');
     }
     public function updateCategory($id)
     {
-        return $this->renderView('updateCategory');
+        $category = new CategoryModel;
+        $data = $category->getCategoryById($id);
+        return $this->renderView('updateCategory', $data[0]);
+    }
+    public function updatedCategory(Request $request)
+    {
+        $body = $request->body();
+        $category = new CategoryModel;
+        $category->updateCategory($body['id'], $body);
+        return $this->redierctTo('/dashboard/category');
+    }
+    public function deletedCategory(Request $request)
+    {
+        $category = new CategoryModel;
+        $category->deleteCategoryById($request->body()['id']);
+        return $this->redierctTo('/dashboard/category');
     }
 }
