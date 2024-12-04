@@ -26,10 +26,19 @@ class UserModel extends Model
     {
         return $this->deleteById('users', intval($id));
     }
-
     public function getUserByEmail($email)
     {
-
+        
         return array_merge($this->getBy('users', 'email', $email), $this->getUserRoleByEmail($email));
+    }
+    public function getByEmial($email){
+        return $this->getBy('users', 'email', $email);
+    }
+    public function getUserAndRole()
+    {
+        return $this->getUsersWithRoles();
+    }
+    public function getUsersStatusCount(){
+        return $this->getByStatus('users');
     }
 }
