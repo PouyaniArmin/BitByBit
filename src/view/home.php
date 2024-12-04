@@ -2,10 +2,10 @@
     <div class="row g-2">
         <div class="col-8 pt-3">
             <div class="card text-bg-dark lasted-post my-4 mx-auto text-end">
-                <img src="/images/ubuntu18.webp" class="card-img" alt="...">
+                <img src="<?php echo htmlspecialchars($image ?? false,ENT_QUOTES,'UTF-8')?>" class="card-img" alt="...">
                 <div class="card-img-overlay d-flex flex-column justify-content-end">
-                    <h5 class="card-title">سربرگ</h5>
-                    <p class="card-text">ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
+                    <h5 class="card-title"><?php echo $title ?? null ?></h5>
+                    <!-- <p class="card-text "></p> -->
                     <div class="d-flex justify-content-between text-white">
                         <small><i class="bi bi-clock"></i> 3 دقیقه پیش</small>
                         <small><i class="bi bi-person-fill"></i>آرمین غلامی </small>
@@ -53,7 +53,7 @@
         <div class="row g-2 justify-content-end py-4">
             <div class="col-4 py-4">
                 <div class="card text-bg-dark">
-                    <img src="/images/bit.webp" class="card-img img-thumb" alt="...">
+                    <img src="<?php echo htmlspecialchars('/images/bit.webp',ENT_QUOTES,'UTF-8')?>" class="card-img img-thumb" alt="...">
                     <div class="card-img-overlay">
                         <h5 class="card-title bg-white text-dark text-center w-50">دسته بندی</h5>
                     </div>
@@ -64,7 +64,7 @@
             </div>
             <div class="col-4 py-4">
                 <div class="card text-bg-dark">
-                    <img src="/images/Office-planting.jpg" class="card-img img-thumb" alt="...">
+                    <img src="<?php echo htmlspecialchars('/images/Office-planting.jpg',ENT_QUOTES,'UTF-8')?>" class="card-img img-thumb" alt="...">
                     <div class="card-img-overlay">
                         <h5 class="card-title bg-white text-dark text-center w-50">دسته بندی</h5>
                     </div>
@@ -75,7 +75,7 @@
             </div>
             <div class="col-4 py-4">
                 <div class="card text-bg-dark">
-                    <img src="/images/three.jpg" class="card-img img-thumb" alt="...">
+                    <img src="<?php echo htmlspecialchars('/images/three.jpg',ENT_QUOTES,'UTF-8')?>" class="card-img img-thumb" alt="...">
                     <div class="card-img-overlay">
                         <h5 class="card-title bg-white text-dark text-center w-50">دسته بندی</h5>
                     </div>
@@ -94,7 +94,7 @@
         </div>
         <div class="py-4">
             <div class="card d-flex flex-row-reverse justify-content-end text-end">
-                <img src="/images/ubuntu18.webp" class="card-img-right" alt="تصویر کارت" style="width: 300px; object-fit: cover;">
+                <img src="<?php echo htmlspecialchars('/images/ubuntu18.webp',ENT_QUOTES,'UTF-8')?>" class="card-img-right" alt="تصویر کارت" style="width: 300px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">عنوان کارت</h5>
                     <p class="card-text">توضیحات کارت. این متن می‌تواند توضیحات مختصری درباره‌ی محتوای کارت باشد.</p>
@@ -107,7 +107,7 @@
         </div>
         <div class="py-4">
             <div class="card d-flex flex-row-reverse justify-content-end text-end">
-                <img src="/images/bit.webp" class="card-img-right" alt="تصویر کارت" style="width: 300px; object-fit: cover;">
+                <img src="<?php echo htmlspecialchars('/images/bit.webp',ENT_QUOTES,'UTF-8')?>" class="card-img-right" alt="تصویر کارت" style="width: 300px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">عنوان کارت</h5>
                     <p class="card-text">توضیحات کارت. این متن می‌تواند توضیحات مختصری درباره‌ی محتوای کارت باشد.</p>

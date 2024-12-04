@@ -1,18 +1,4 @@
-<div class="mx-4">
-<?php
-
-use App\Utils\CsrfToken;
- if (isset($_SESSION['errors'])): ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <?php foreach ($_SESSION['errors'] as $error): ?>
-            <li><?php echo htmlspecialchars($error); ?></li>
-        <?php endforeach; ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php unset($_SESSION['errors']); ?>
-<?php endif; ?>
-
-</div>
+<?php use App\Utils\CsrfToken;?>
 <div class="pt-3 text-center">
     <h3 style="color: #4C489D;"><strong> ثبت نام </strong></h3>
 </div>
@@ -23,7 +9,7 @@ use App\Utils\CsrfToken;
                 <input type="hidden" name="csrf_token" value="<?php echo CsrfToken::generateToken() ?>">
                 <div class="register__field">
                     <i class="register__icon fas fa-user"></i>
-                    <input type="text" name="name" class="register__input" placeholder="نام کاربری">
+                    <input type="text" name="username" class="register__input" placeholder="نام کاربری">
                 </div>
                 <div class="register__field">
                     <i class="register__icon fas fa-envelope"></i>

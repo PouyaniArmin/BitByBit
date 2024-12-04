@@ -14,6 +14,7 @@
   <!-- icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
 </head>
+
 <body class="d-flex flex-column min-vh-100">
   <nav class="navbar navbar-expand-lg navbar-light py-4">
     <div class="container">
@@ -44,8 +45,8 @@
           </li>
           <li class="nav-item">
           </li>
-          <form class="d-flex" role="search" style="font-size: 0.8rem;">
-            <input class="form-control form-control-sm me-2" type="search" style="width:150px" placeholder="جستجو" aria-label="Search">
+          <form action="/search" method="GET" class="d-flex" role="search" style="font-size: 0.8rem;">
+            <input class="form-control form-control-sm me-2" type="search" name="search" style="width:150px" placeholder="جستجو" aria-label="Search">
             <button class="btn btn-sm btn-outline-primary " style="font-size: 0.8rem;" type="submit">جستجو</button>
           </form>
         </ul>
@@ -53,6 +54,34 @@
     </div>
   </nav>
   <main class="flex-grow-1 py-2">
+    <div class="mx-4">
+      <?php
+
+      use App\Utils\FlashMessage;
+
+      if (FlashMessage::hasMessage('errors')):
+        $errors = FlashMessage::getMessage('errors'); ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <?php foreach ($errors as $error): ?>
+            <li><?php echo htmlspecialchars($error); ?></li>
+          <?php endforeach; ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <?php endif; ?>
+    </div>
+    <div class="mx-4">
+      <?php
+      if (FlashMessage::hasMessage('success')):
+        $messages = FlashMessage::getMessage('success'); ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <?php foreach ($messages as $message): ?>
+            <li><?php echo htmlspecialchars($message); ?></li>
+          <?php endforeach; ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <?php endif; ?>
+    </div>
+
     {{content}}
   </main>
   <!-- footer -->
@@ -72,4 +101,6 @@
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
+<script src="/js/falshMessage.js"></script>
+
 </html>

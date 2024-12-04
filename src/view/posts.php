@@ -6,6 +6,7 @@
     </div>
 
     <div class="list-group">
+        <?php if (isset($data)&& is_array($data)) :?>
         <?php foreach ($data as $items): ?>
             <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                 <div>
@@ -29,5 +30,6 @@
                 </div>
             </div>
         <?php endforeach; ?>
+        <?php endif;?>
     </div>
 </div>

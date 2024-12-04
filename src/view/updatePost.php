@@ -2,14 +2,14 @@
     <h2>ویرایش پست</h2>
     <form action="/dashboard/posts/update" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
-            <input type="hidden" name="id" value="<?php echo $id?>" id="">
+            <input type="hidden" name="id" value="<?php echo $id ?? null ?>" id="">
             <label for="title" class="form-label">عنوان پست</label>
-            <input type="text" class="form-control" id="title" name="title" value="<?php echo $title; ?>" required>
+            <input type="text" class="form-control" id="title" name="title" value="<?php echo $title?? null; ?>" required>
         </div>
         <div class="mb-3">
             <label for="content-editor" class="form-label">محتوا</label>
             <textarea name="content" id="content-editor">
-                <?php echo base64_decode($content); ?>    
+                <?php echo base64_decode($content ?? false); ?>    
             </textarea>
         </div>
         <div class="mb-3">
@@ -22,39 +22,4 @@
     </form>
 </div>
 
-<script>
-    tinymce.init({
-        selector: '#content-editor',
-        plugins: 'image link code lists',
-        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | bullist numlist | code',
-        height: 600,
-        file_picker_types: 'image',
-
-        forced_root_block: false,
-        forced_br_newlines: true,
-        forced_p_newlines: false,
-
-        valid_elements: '*[*]',
-        cleanup: true,
-        file_picker_callback: function(callback, value, meta) {
-            if (meta.filetype === 'image') {
-                const input = document.createElement('input');
-                input.setAttribute('type', 'file');
-                input.setAttribute('accept', 'image/*');
-
-                input.onchange = function() {
-                    const file = this.files[0];
-                    const reader = new FileReader();
-
-                    reader.onload = function() {
-                        callback(reader.result, {
-                            alt: file.name
-                        });
-                    };
-                    reader.readAsDataURL(file);
-                };
-                input.click();
-            }
-        }
-    });
-</script>
+<script src="/js/editor.js"></script>

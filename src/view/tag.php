@@ -13,34 +13,34 @@
 
 </div>
 <div class="container mt-5">
-    <h2>ایجاد دسته‌بندی جدید</h2>
+    <h2>ایجاد تگ</h2>
     <form method="POST">
         <div class="mb-3">
-            <label for="categoryName" class="form-label">نام دسته‌بندی</label>
-            <input type="text" class="form-control" id="categoryName" name="category_name" placeholder="نام دسته‌بندی را وارد کنید">
+            <label for="tagName" class="form-label">نام تگ</label>
+            <input type="text" class="form-control" id="tagName" name="tag_name" placeholder="نام دسته‌بندی را وارد کنید">
         </div>
-        <button type="submit" class="btn btn-primary">ایجاد دسته‌بندی</button>
+        <button type="submit" class="btn btn-primary">ایجاد تگ</button>
     </form>
 
-    <h3 class="mt-5">لیست دسته‌بندی‌ها</h3>
+    <h3 class="mt-5">لیست تگ ها</h3>
     <table class="table">
         <thead>
             <tr>
                 <th>#</th>
-                <th>نام دسته‌بندی</th>
+                <th>نام تگ</th>
                 <th>عملیات</th>
             </tr>
         </thead>
         <tbody>
-            <?php if(isset($data)&& is_array($data)):?>
+        <?php if(isset($data)&& is_array($data)):?>
             <?php $i = 1;
             foreach ($data as $item): ?>
                 <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $item['category_name'] ?></td>
+                    <td><?php echo $item['tag_name'] ?></td>
                     <td>
-                        <a href="/dashboard/category/update/<?php echo $item['id']?>" class="btn btn-warning btn-sm">ویرایش</a>
-                        <form action="/dashboard/category/delete/<?php echo $item['id']?>" method="POST" style="display:inline;">
+                        <a href="/dashboard/tag/update/<?php echo $item['id']?>" class="btn btn-warning btn-sm">ویرایش</a>
+                        <form action="/dashboard/tag/delete/<?php echo $item['id']?>" method="POST" style="display:inline;">
                         <input type="hidden" name="id" value="<?php echo $item['id']?>">   
                         <button type="submit" class="btn btn-danger btn-sm">حذف</button>
                         </form>
@@ -48,9 +48,7 @@
                 </tr>
             <?php $i++;
             endforeach; ?>
-            <?php endif;?>
-            
-            <!-- سایر دسته‌بندی‌ها -->
+            <?php endif?>
         </tbody>
     </table>
 </div>

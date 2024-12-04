@@ -6,7 +6,7 @@
             </div>
             <!-- by defulat web -->
             <div class="card post border-0 border-bottom p-2 align-items-center">
-                <img src="/images/bit.webp" class="img-fluid" alt="">
+                <img src="<?php echo htmlspecialchars('/images/bit.webp',ENT_QUOTES,'UTF-8')?>" class="img-fluid" alt="">
                 <div class="m-2 justify-content-end text-end">
                     <h1>عنوان</h1>
                     <p class="text-muted">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز...</p>
@@ -15,7 +15,7 @@
             </div>
             <!-- 2 -->
             <div class="card post border-0 border-bottom p-2 align-items-center">
-                <img src="/images/bit.webp" class="img-fluid" alt="">
+                <img src="<?php echo htmlspecialchars('/images/bit.webp',ENT_QUOTES,'UTF-8')?>" class="img-fluid" alt="">
                 <div class="m-2 justify-content-end text-end">
                     <h1>عنوان</h1>
                     <p class="text-muted">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز...</p>
@@ -24,7 +24,7 @@
             </div>
             <!-- 3 -->
             <div class="card post border-0 border-bottom p-2 align-items-center">
-                <img src="/images/ubuntu18.webp" class="img-fluid" alt="">
+                <img src="<?php echo htmlspecialchars('/images/ubuntu18.webp',ENT_QUOTES,'UTF-8')?>" class="img-fluid" alt="">
                 <div class="m-2 justify-content-end text-end">
                     <h1>عنوان</h1>
                     <p class="text-muted">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز...</p>

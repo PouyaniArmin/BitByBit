@@ -1,3 +1,4 @@
+
 <div class="container mt-5">
     <h2>لیست کاربران</h2>
     <table class="table table-striped">
@@ -11,7 +12,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <?php if(isset($data)&& is_array($data)):?>
+            <?php $i=1; foreach($data as $items): ?>
+                <tr>
+                <th scope="row"><?php echo $i;?></th>
+                <td><?php echo $items['username']; ?></td>
+                <td><?php echo $items['email']?></td>
+                <td><?php echo $items['name'] ?? 'User'?></td>
+                <td>
+                    <a href="/dashboard/users/update/<?php echo $items['id']?>" class="btn btn-warning btn-sm">ویرایش</a>
+                    <a href="/delete-user/1" class="btn btn-danger btn-sm">حذف</a>
+                </td>
+            </tr>    
+                <?php $i++; endforeach; ?>
+                <?php endif?>
+            <!-- <tr>
                 <th scope="row">1</th>
                 <td>علی</td>
                 <td>ali@example.com</td>
@@ -40,7 +55,7 @@
                     <a href="/edit-user/3" class="btn btn-warning btn-sm">ویرایش</a>
                     <a href="/delete-user/3" class="btn btn-danger btn-sm">حذف</a>
                 </td>
-            </tr>
+            </tr> -->
             <!-- ادامه لیست کاربران -->
         </tbody>
     </table>
