@@ -13,6 +13,11 @@ class CategoryController extends Controller
 
     public function __construct()
     {
+
+        $this->setHeaders('Content-Type', 'text/html; charset=UTF-8');
+        $this->setHeaders('X-Frame-Options', 'SAMEORIGIN');
+        $this->setHeaders('X-Content-Type-Options', 'nosniff');
+        // $this->setHeaders('Content-Security-Policy', "default-src 'self'");
         $this->layout = "main-dashboard";
     }
 
