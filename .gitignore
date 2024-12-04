@@ -3,3 +3,6 @@ vendor/
 .idea/
 node_modules/
 .DS_Store
+
+App/Utils/MailService.php
+public/images
