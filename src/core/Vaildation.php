@@ -2,8 +2,13 @@
 
 namespace App\Core;
 
+use App\Utils\FlashMessage;
+
 class Vaildation
 {
+    /**
+     * Default error messages for validation rules.
+     */
     private const DEFAULT_VALIDATION_ERRORS = [
         'required' => 'Please Enter the %s',
         'email' => 'The %s is not a valid Email address',
@@ -21,7 +26,13 @@ class Vaildation
         'allowed_types' => 'The %s must be of type: %s'
 
     ];
-
+    /**
+     * Validates the input data based on the provided validation rules.
+     *
+     * @param array $fields Validation rules for each field.
+     * @param array $data The input data to validate.
+     * @return mixed|null The validated data, or null if validation fails.
+     */
     public function validate($fields, $data)
     {
         $errors = [];
@@ -54,7 +65,13 @@ class Vaildation
         return $data;
     }
     // validate files
-
+    /**
+     * Validates the file input data based on the provided validation rules.
+     *
+     * @param array $fields Validation rules for each file field.
+     * @param array $data The file input data to validate.
+     * @return mixed|null The validated data, or null if validation fails.
+     */
     public function validateFiles($fields, $data)
     {
 
@@ -87,7 +104,14 @@ class Vaildation
         }
         return $data;
     }
-    //rules 
+
+    /**
+     * Validates if the field is required (not empty).
+     *
+     * @param array $data The input data.
+     * @param string $field The field to validate.
+     * @return bool True if valid, false otherwise.
+     */
 
     public function is_required(array $data, string $field): bool
     {
@@ -97,6 +121,13 @@ class Vaildation
         }
         return isset($data[$field]) && trim($data[$field]) !== '';
     }
+    /**
+     * Validates if the field is a valid email address.
+     *
+     * @param array $data The input data.
+     * @param string $field The field to validate.
+     * @return bool True if valid, false otherwise.
+     */
 
     public function is_email(array $data, string $field): bool
     {
@@ -105,6 +136,14 @@ class Vaildation
         }
         return filter_var($data[$field], FILTER_VALIDATE_EMAIL);
     }
+    /**
+     * Validates if the field meets the minimum length requirement.
+     *
+     * @param array $data The input data.
+     * @param string $field The field to validate.
+     * @param int $min The minimum length.
+     * @return bool True if valid, false otherwise.
+     */
     public function is_min(array $data, string $field, int $min): bool
     {
         if (!isset($data[$field])) {
@@ -112,6 +151,14 @@ class Vaildation
         }
         return strlen($data[$field]) >= $min;
     }
+    /**
+     * Validates if the field does not exceed the maximum length.
+     *
+     * @param array $data The input data.
+     * @param string $field The field to validate.
+     * @param int $max The maximum length.
+     * @return bool True if valid, false otherwise.
+     */
     public function is_max(array $data, string $field, int $max): bool
     {
         if (!isset($data[$field])) {
@@ -119,6 +166,13 @@ class Vaildation
         }
         return strlen($data[$field]) <= $max;
     }
+    /**
+     * Validates if the field contains only alphanumeric characters.
+     *
+     * @param array $data The input data.
+     * @param string $field The field to validate.
+     * @return bool True if valid, false otherwise.
+     */
     public function is_alphanumeric(array $data, string $field): bool
     {
         if (!isset($data[$field])) {
@@ -126,7 +180,14 @@ class Vaildation
         }
         return ctype_alnum($data[$field]);
     }
-
+    /**
+     * Validates if the field matches another field.
+     *
+     * @param array $data The input data.
+     * @param string $field The field to validate.
+     * @param string $other The field to compare with.
+     * @return bool True if valid, false otherwise.
+     */
     public function is_same(array $data, string $field, string $other): bool
     {
         if (isset($data[$field], $data[$other])) {
@@ -139,6 +200,13 @@ class Vaildation
 
         return false;
     }
+    /**
+     * Validates if the field meets the security requirements for a password.
+     *
+     * @param array $data The input data.
+     * @param string $field The field to validate.
+     * @return bool True if valid, false otherwise.
+     */
     public function is_secure(array $data, string $field): bool
     {
         if (!isset($data[$field])) {
@@ -148,7 +216,15 @@ class Vaildation
         $pattern = "#.*^(?=.{8,64})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#";
         return preg_match($pattern, $data[$field]);
     }
-    // rules files
+    // File validation rules
+
+    /**
+     * Validates if the uploaded file is an image.
+     *
+     * @param array $data The input data.
+     * @param string $field The field to validate.
+     * @return bool True if valid, false otherwise.
+     */
     public function is_image(array $data, string $field): bool
     {
         if (isset($data[$field]) && isset($data[$field]['tmp_name']) && !empty($data[$field]['tmp_name'])) {
@@ -161,9 +237,14 @@ class Vaildation
         }
         return false;
     }
-
+    /**
+     * Sends validation errors to the view.
+     *
+     * @param array $errors The validation errors.
+     */
     private function sendErrorsToView($errors)
     {
-        $_SESSION['errors'] = $errors;
+        $falsh = new FlashMessage();
+        $falsh->setMessage('errors', $errors);
     }
 }
