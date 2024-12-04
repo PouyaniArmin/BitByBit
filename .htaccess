@@ -1,0 +1,23 @@
+
+Header set Content-Security-Policy "default-src 'self'; script-src 'self'; object-src 'none'; font-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline';"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+Header set X-Content-Type-Options "nosniff"
+Header set Referrer-Policy "no-referrer-when-downgrade"
+Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+ServerTokens Prod
+ServerSignature Off
+Header unset Server
+
+php_flag session.cookie_httponly on
+php_flag session.cookie_secure on
+php_value session.cookie_samesite Strict
+
+<Files "phpimageview.php">
+  Deny from all
+</Files>
+<Files ".env">
+    Order Allow,Deny
+    Deny from all
+</Files>
