@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  php-apache:
+    build: .
+    container_name: php-apache-container
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8080:80"
+    networks:
+      - php-network
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: my_secure_password
+      MYSQL_DATABASE: bitbybit
+    ports:
+      - "3306:3306"
+    networks:
+      - php-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-container
+    environment:
+      MYSQL_ROOT_PASSWORD: my_secure_password
+    ports:
+      - "8081:80"
+    networks:
+      - php-network
+
+networks:
+  php-network:
+    driver: bridge
